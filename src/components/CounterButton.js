@@ -25,8 +25,8 @@ const SideButton = styled('button')`
 `
 
 const CountValue = styled('span')`
-  color: cadetblue;
   font-weight: bold;
+  font-size: 1.1em;
 `
 
 export default class CounterButton extends Component {

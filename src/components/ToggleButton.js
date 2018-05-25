@@ -7,7 +7,7 @@ const StyledButton = styled('section')`
   align-items: center;
   justify-content: center;
   height: 40px;
-  background: ${props => (props.checked ? 'greenyellow' : '#ddd')};
+  background: ${props => (props.checked ? 'skyblue' : '#ddd')};
   border: 1px solid #ccc;
   border-radius: 4px;
 `
