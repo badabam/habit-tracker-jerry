@@ -46,7 +46,7 @@ storiesOf('DateSwitch', module).add('default', () => (
 
 storiesOf('HabitList', module).add('counted', () => (
   <HabitList
-    headline="Gut"
+    headline="Headline"
     habits={[
       { text: 'A button', id: '0', checked: false },
       { text: 'Another button', id: '1', count: 0 },

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import styled from 'react-emotion'
 import { css } from 'emotion'
+import moment from 'moment'
 
 import habits from './data/habits'
 import globalStyles from './styles/global'
 import HabitList from './components/HabitList'
+import DateSwitch from './components/DateSwitch'
 
 // inject global styles
 globalStyles()
@@ -15,6 +16,7 @@ class App extends Component {
 
     this.state = {
       habits: habits,
+      dayOffset: 0,
     }
   }
 
@@ -50,9 +52,41 @@ class App extends Component {
     })
   }
 
+  get currentDate() {
+    return moment()
+      .add(this.state.dayOffset, 'days')
+      .format('DD.MM.YYYY')
+  }
+
+  moveDayLeft() {
+    this.setState(state => ({
+      dayOffset: state.dayOffset - 1,
+    }))
+  }
+
+  moveDayRight() {
+    this.setState({
+      dayOffset: this.state.dayOffset + 1,
+    })
+  }
+
   render() {
+    const dateSwitchStyles = css`
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+    `
+
     return (
       <React.Fragment>
+        <DateSwitch
+          className={dateSwitchStyles}
+          text={this.currentDate}
+          onLeft={e => this.moveDayLeft()}
+          onRight={e => this.moveDayRight()}
+          isToday={this.state.dayOffset === 0}
+        />
         <HabitList
           headline="Gut"
           habits={this.state.habits.filter(habit => habit.category === 'good')}

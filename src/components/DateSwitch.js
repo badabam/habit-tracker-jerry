@@ -21,6 +21,10 @@ const SideButton = styled('button')`
   font-size: 1.3em;
 `
 
+const DateText = styled('span')`
+  font-weight: ${props => (props.isToday ? 'bold' : 'normal')};
+`
+
 export default class DateSwitch extends Component {
   render() {
     const { onLeft, onRight, text } = this.props
@@ -28,7 +32,7 @@ export default class DateSwitch extends Component {
     return (
       <StyledButton>
         <SideButton onClick={onLeft}>‹</SideButton>
-        {text}
+        <DateText isToday={this.props.isToday}>{text}</DateText>
         <SideButton onClick={onRight}>›</SideButton>
       </StyledButton>
     )
