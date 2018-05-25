@@ -17,39 +17,36 @@ class App extends Component {
     this.state = {
       habits: habits,
       dayOffset: 0,
+      history: {},
     }
   }
 
-  updateHabitState(id, changeFunction) {
-    const allHabits = this.state.habits
-    const habitIndex = allHabits.findIndex(habit => habit.id === id)
-    const oldHabit = allHabits[habitIndex]
+  updateHistory(id, updateFunction) {
+    const oldEntries = this.state.history[this.currentDate] || {}
+    const oldValue = oldEntries[id]
 
-    const newHabits = [
-      ...allHabits.slice(0, habitIndex),
-      { ...oldHabit, ...changeFunction(oldHabit) },
-      ...allHabits.slice(habitIndex + 1),
-    ]
-
-    this.setState({ habits: newHabits })
+    const updatedEntries = {
+      ...oldEntries,
+      [id]: updateFunction(oldValue),
+    }
+    this.setState({
+      history: { ...this.state.history, [this.currentDate]: updatedEntries },
+    })
   }
 
   toggleHabit(id) {
-    this.updateHabitState(id, oldHabit => ({ checked: !oldHabit.checked }))
+    this.updateHistory(id, oldValue => !oldValue)
   }
 
   increaseCount(id) {
-    this.updateHabitState(id, oldHabit => ({ count: oldHabit.count + 1 }))
+    this.updateHistory(id, oldValue => (oldValue == null ? 1 : oldValue + 1))
   }
 
   decreaseCount(id) {
-    this.updateHabitState(id, oldHabit => {
-      if (oldHabit.count === 0) {
-        return oldHabit
-      } else {
-        return { count: oldHabit.count - 1 }
-      }
-    })
+    this.updateHistory(
+      id,
+      oldValue => (oldValue == null || oldValue === 0 ? 0 : oldValue - 1)
+    )
   }
 
   get currentDate() {
@@ -90,6 +87,7 @@ class App extends Component {
         <HabitList
           headline="Gut"
           habits={this.state.habits.filter(habit => habit.category === 'good')}
+          data={this.state.history[this.currentDate]}
           onToggle={id => this.toggleHabit(id)}
           onIncrease={id => this.increaseCount(id)}
           onDecrease={id => this.decreaseCount(id)}
@@ -97,6 +95,7 @@ class App extends Component {
         <HabitList
           headline="Schlecht"
           habits={this.state.habits.filter(habit => habit.category === 'bad')}
+          data={this.state.history[this.currentDate]}
           onToggle={id => this.toggleHabit(id)}
           onIncrease={id => this.increaseCount(id)}
           onDecrease={id => this.decreaseCount(id)}

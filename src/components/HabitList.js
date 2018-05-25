@@ -15,25 +15,27 @@ const Headline = styled('h3')`
 
 export default class HabitList extends Component {
   render() {
+    const data = this.props.data
+
     return (
       <section>
         <Headline>{this.props.headline}</Headline>
         <Grid>
           {this.props.habits.map(habit => {
-            if (habit.checked != null) {
+            if (habit.type === 'toggle') {
               return (
                 <ToggleButton
                   text={habit.text}
-                  checked={habit.checked}
+                  checked={(data && data[habit.id]) || false}
                   key={habit.id}
                   onClick={e => this.props.onToggle(habit.id)}
                 />
               )
-            } else if (habit.count != null) {
+            } else if (habit.type === 'count') {
               return (
                 <CounterButton
                   text={habit.text}
-                  count={habit.count}
+                  count={(data && data[habit.id]) || 0}
                   key={habit.id}
                   onIncrease={e => this.props.onIncrease(habit.id)}
                   onDecrease={e => this.props.onDecrease(habit.id)}
