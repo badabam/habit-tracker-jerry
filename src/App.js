@@ -95,6 +95,8 @@ class App extends Component {
                 onDecrease={e => this.decreaseCount(habit.id)}
               />
             )
+          } else {
+            return 'Button type not found'
           }
         })}
       </Grid>
