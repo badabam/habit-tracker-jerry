@@ -65,7 +65,7 @@ class App extends Component {
 
     const newHabits = [
       ...allHabits.slice(0, habitIndex),
-      { ...oldHabit, count: oldHabit.count },
+      { ...oldHabit, count: oldHabit.count - 1 },
       ...allHabits.slice(habitIndex + 1),
     ]
 
