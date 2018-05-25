@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import styled from 'react-emotion'
+import { css } from 'emotion'
 
-import habits from './habits'
+import habits from './data/habits'
+import globalStyles from './styles/global'
 import HabitList from './components/HabitList'
 
-const Grid = styled('section')`
-  display: grid;
-  grid-gap: 10px;
-`
+// inject global styles
+globalStyles()
 
 class App extends Component {
   constructor(props) {
@@ -52,7 +52,7 @@ class App extends Component {
 
   render() {
     return (
-      <Grid>
+      <React.Fragment>
         <HabitList
           headline="Gut"
           habits={this.state.habits.filter(habit => habit.category === 'good')}
@@ -67,7 +67,7 @@ class App extends Component {
           onIncrease={id => this.increaseCount(id)}
           onDecrease={id => this.decreaseCount(id)}
         />
-      </Grid>
+      </React.Fragment>
     )
   }
 }
