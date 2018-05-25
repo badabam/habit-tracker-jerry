@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import ToggleButton from '../src/components/ToggleButton'
 import CounterButton from '../src/components/CounterButton'
+import DateSwitch from '../src/components/DateSwitch'
 import HabitList from '../src/components/HabitList'
 
 storiesOf('ToggleButton', module)
@@ -34,6 +35,14 @@ storiesOf('CounterButton', module)
       onDecrease={action('decrease')}
     />
   ))
+
+storiesOf('DateSwitch', module).add('default', () => (
+  <DateSwitch
+    text={'25.5.2018'}
+    onLeft={action('left')}
+    onRight={action('right')}
+  />
+))
 
 storiesOf('HabitList', module).add('counted', () => (
   <HabitList
