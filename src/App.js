@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import styled from 'react-emotion'
+import uid from 'uid'
+
 import ToggleButton from './components/ToggleButton'
 import CounterButton from './components/CounterButton'
-import styled from 'react-emotion'
 
 const Grid = styled('section')`
   display: grid;
@@ -14,13 +16,13 @@ class App extends Component {
 
     this.state = {
       habits: [
-        { text: 'Sport gemacht', checked: false, id: 0 },
-        { text: 'Liter getrunken', count: 0, id: 1 },
-        { text: 'Gesund gegessen', checked: false, id: 2 },
-        { text: 'Abends gelernt', checked: false, id: 3 },
-        { text: 'Im Kurs beteiligt', checked: false, id: 4 },
-        { text: 'Zigaretten geraucht', count: 0, id: 5 },
-        { text: 'Fragen im Kurs gestellt', count: 0, id: 6 },
+        { text: 'Sport gemacht', checked: false, id: uid() },
+        { text: 'Liter getrunken', count: 0, id: uid() },
+        { text: 'Gesund gegessen', checked: false, id: uid() },
+        { text: 'Abends gelernt', checked: false, id: uid() },
+        { text: 'Im Kurs beteiligt', checked: false, id: uid() },
+        { text: 'Zigaretten geraucht', count: 0, id: uid() },
+        { text: 'Fragen im Kurs gestellt', count: 0, id: uid() },
       ],
     }
   }
