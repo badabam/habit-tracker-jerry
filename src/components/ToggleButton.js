@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import styled from 'react-emotion'
 
 const StyledButton = styled('button')`
+  font-size: 1.3em;
   width: 100%;
   height: 40px;
   background: ${props => (props.checked ? 'greenyellow' : '#eee')};
-  border: 1px solid #333;
+  border: none;
 `
 
 export default class ToggleButton extends Component {
