@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import ToggleButton from '../src/components/ToggleButton'
 import CounterButton from '../src/components/CounterButton'
+import HabitList from '../src/components/HabitList'
 
 storiesOf('ToggleButton', module)
   .add('unchecked', () => (
@@ -33,3 +34,17 @@ storiesOf('CounterButton', module)
       onDecrease={action('decrease')}
     />
   ))
+
+storiesOf('HabitList', module).add('counted', () => (
+  <HabitList
+    headline="Gut"
+    habits={[
+      { text: 'A button', id: '0', checked: false },
+      { text: 'Another button', id: '1', count: 0 },
+      { text: 'A third button', id: '2', count: 3 },
+    ]}
+    onToggle={action('toggle')}
+    onIncrease={action('increase')}
+    onDecrease={action('decrease')}
+  />
+))

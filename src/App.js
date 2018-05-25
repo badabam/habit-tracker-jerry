@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import styled from 'react-emotion'
 import uid from 'uid'
 
-import ToggleButton from './components/ToggleButton'
-import CounterButton from './components/CounterButton'
+import HabitList from './components/HabitList'
 
 const Grid = styled('section')`
   display: grid;
@@ -16,13 +15,45 @@ class App extends Component {
 
     this.state = {
       habits: [
-        { text: 'Sport gemacht', checked: false, id: uid() },
-        { text: 'Liter getrunken', count: 0, id: uid() },
-        { text: 'Gesund gegessen', checked: false, id: uid() },
-        { text: 'Abends gelernt', checked: false, id: uid() },
-        { text: 'Im Kurs beteiligt', checked: false, id: uid() },
-        { text: 'Zigaretten geraucht', count: 0, id: uid() },
-        { text: 'Fragen im Kurs gestellt', count: 0, id: uid() },
+        { text: 'Sport gemacht', checked: false, id: uid(), category: 'good' },
+        {
+          text: 'Gesund gegessen',
+          checked: false,
+          id: uid(),
+          category: 'good',
+        },
+        { text: 'Abends gelernt', checked: false, id: uid(), category: 'good' },
+        {
+          text: 'Im Kurs beteiligt',
+          checked: false,
+          id: uid(),
+          category: 'good',
+        },
+        {
+          text: 'Liter Wasser getrunken',
+          count: 0,
+          id: uid(),
+          category: 'good',
+        },
+        {
+          text: 'Fragen im Kurs gestellt',
+          count: 0,
+          id: uid(),
+          category: 'good',
+        },
+        {
+          text: 'Alkohol getrunken',
+          checked: false,
+          id: uid(),
+          category: 'bad',
+        },
+        {
+          text: 'Nicht-Bio-Fleisch gegessen',
+          checked: false,
+          id: uid(),
+          category: 'bad',
+        },
+        { text: 'Zigaretten geraucht', count: 0, id: uid(), category: 'bad' },
       ],
     }
   }
@@ -77,30 +108,20 @@ class App extends Component {
   render() {
     return (
       <Grid>
-        {this.state.habits.map(habit => {
-          if (habit.checked != null) {
-            return (
-              <ToggleButton
-                text={habit.text}
-                checked={habit.checked}
-                key={habit.id}
-                onClick={e => this.toggleHabit(habit.id)}
-              />
-            )
-          } else if (habit.count != null) {
-            return (
-              <CounterButton
-                text={habit.text}
-                count={habit.count}
-                key={habit.id}
-                onIncrease={e => this.increaseCount(habit.id)}
-                onDecrease={e => this.decreaseCount(habit.id)}
-              />
-            )
-          } else {
-            return 'Button type not found'
-          }
-        })}
+        <HabitList
+          headline="Gut"
+          habits={this.state.habits.filter(habit => habit.category === 'good')}
+          onToggle={id => this.toggleHabit(id)}
+          onIncrease={id => this.increaseCount(id)}
+          onDecrease={id => this.decreaseCount(id)}
+        />
+        <HabitList
+          headline="Schlecht"
+          habits={this.state.habits.filter(habit => habit.category === 'bad')}
+          onToggle={id => this.toggleHabit(id)}
+          onIncrease={id => this.increaseCount(id)}
+          onDecrease={id => this.decreaseCount(id)}
+        />
       </Grid>
     )
   }
