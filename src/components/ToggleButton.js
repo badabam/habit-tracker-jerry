@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import styled from 'react-emotion'
 
-const StyledButton = styled('button')`
-  font-size: 1.3em;
-  width: 100%;
+const StyledButton = styled('section')`
+  display: flex;
+  font-family: sans-serif;
+  align-items: center;
+  justify-content: center;
   height: 40px;
-  background: ${props => (props.checked ? 'greenyellow' : '#eee')};
-  border: none;
+  background: ${props => (props.checked ? 'greenyellow' : '#ddd')};
+  border: 1px solid #ccc;
+  border-radius: 4px;
 `
 
 export default class ToggleButton extends Component {
