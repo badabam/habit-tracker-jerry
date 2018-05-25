@@ -18,51 +18,36 @@ class App extends Component {
     }
   }
 
-  toggleHabit(id) {
+  updateHabitState(id, changeFunction) {
     const allHabits = this.state.habits
     const habitIndex = allHabits.findIndex(habit => habit.id === id)
     const oldHabit = allHabits[habitIndex]
 
     const newHabits = [
       ...allHabits.slice(0, habitIndex),
-      { ...oldHabit, checked: !oldHabit.checked },
+      { ...oldHabit, ...changeFunction(oldHabit) },
       ...allHabits.slice(habitIndex + 1),
     ]
 
     this.setState({ habits: newHabits })
+  }
+
+  toggleHabit(id) {
+    this.updateHabitState(id, oldHabit => ({ checked: !oldHabit.checked }))
   }
 
   increaseCount(id) {
-    const allHabits = this.state.habits
-    const habitIndex = allHabits.findIndex(habit => habit.id === id)
-    const oldHabit = allHabits[habitIndex]
-
-    const newHabits = [
-      ...allHabits.slice(0, habitIndex),
-      { ...oldHabit, count: oldHabit.count + 1 },
-      ...allHabits.slice(habitIndex + 1),
-    ]
-
-    this.setState({ habits: newHabits })
+    this.updateHabitState(id, oldHabit => ({ count: oldHabit.count + 1 }))
   }
 
   decreaseCount(id) {
-    const allHabits = this.state.habits
-    const habitIndex = allHabits.findIndex(habit => habit.id === id)
-    const oldHabit = allHabits[habitIndex]
-
-    // check if it is already 0
-    if (oldHabit.count === 0) {
-      return // stop here, if it is already 0
-    }
-
-    const newHabits = [
-      ...allHabits.slice(0, habitIndex),
-      { ...oldHabit, count: oldHabit.count - 1 },
-      ...allHabits.slice(habitIndex + 1),
-    ]
-
-    this.setState({ habits: newHabits })
+    this.updateHabitState(id, oldHabit => {
+      if (oldHabit.count === 0) {
+        return oldHabit
+      } else {
+        return { count: oldHabit.count - 1 }
+      }
+    })
   }
 
   render() {
