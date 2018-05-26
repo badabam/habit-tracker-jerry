@@ -7,7 +7,7 @@ const StyledButton = styled('section')`
   align-items: center;
   justify-content: space-between;
   height: 40px;
-  background: #eee;
+  background: ${props => (props.active ? 'skyblue' : '#eee')};
   border: 1px solid #ccc;
   border-radius: 4px;
   overflow: hidden;
@@ -35,7 +35,7 @@ export default class CounterButton extends Component {
     const { onDecrease, onIncrease, text, count } = this.props
 
     return (
-      <StyledButton>
+      <StyledButton active={count > 0}>
         <SideButton onClick={onDecrease}>-</SideButton>
         <span>
           {text} <CountValue>{count > 0 && `(${count})`}</CountValue>
