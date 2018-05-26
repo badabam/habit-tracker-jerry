@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToggleButton renders correctly 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: sans-serif;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 40px;
+  background: #ddd;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+<ToggleButton
+  checked={false}
+  text="Foo"
+>
+  <Styled(section)
+    checked={false}
+  >
+    <section
+      checked={false}
+      className="emotion-0"
+    >
+      Foo
+    </section>
+  </Styled(section)>
+</ToggleButton>
+`;
+
+exports[`ToggleButton toggles color correctly 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: sans-serif;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 40px;
+  background: #ddd;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+<ToggleButton
+  checked={false}
+  text="Foo"
+>
+  <Styled(section)
+    checked={false}
+  >
+    <section
+      checked={false}
+      className="emotion-0"
+    >
+      Foo
+    </section>
+  </Styled(section)>
+</ToggleButton>
+`;
+
+exports[`ToggleButton toggles color correctly 2`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: sans-serif;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 40px;
+  background: skyblue;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+<ToggleButton
+  checked={true}
+  text="Foo"
+>
+  <Styled(section)
+    checked={true}
+  >
+    <section
+      checked={true}
+      className="emotion-0"
+    >
+      Foo
+    </section>
+  </Styled(section)>
+</ToggleButton>
+`;
