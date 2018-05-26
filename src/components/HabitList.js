@@ -6,6 +6,7 @@ import CounterButton from './CounterButton'
 const Grid = styled('section')`
   display: grid;
   grid-gap: 10px;
+  padding: 0 10px;
 `
 
 const Headline = styled('h3')`

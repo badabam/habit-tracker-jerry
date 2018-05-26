@@ -48,9 +48,9 @@ storiesOf('HabitList', module).add('counted', () => (
   <HabitList
     headline="Headline"
     habits={[
-      { text: 'A button', id: '0', checked: false },
-      { text: 'Another button', id: '1', count: 0 },
-      { text: 'A third button', id: '2', count: 3 },
+      { text: 'A button', id: '0', type: 'toggle' },
+      { text: 'Another button', id: '1', type: 'count' },
+      { text: 'A third button', id: '2', type: 'count' },
     ]}
     onToggle={action('toggle')}
     onIncrease={action('increase')}
