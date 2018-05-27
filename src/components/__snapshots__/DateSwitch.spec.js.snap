@@ -1,5 +1,160 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`DateSwitch has bold text, if it isToday 1`] = `
+.emotion-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: sans-serif;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  height: 40px;
+  background: #fff;
+}
+
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 40px;
+  height: 100%;
+  border: none;
+  background: #eee;
+  font-size: 1.3em;
+}
+
+.emotion-1 {
+  font-weight: normal;
+}
+
+<DateSwitch
+  text="Foo"
+>
+  <Styled(section)>
+    <section
+      className="emotion-3"
+    >
+      <Styled(button)>
+        <button
+          className="emotion-0"
+        >
+          ‹
+        </button>
+      </Styled(button)>
+      <Styled(span)>
+        <span
+          className="emotion-1"
+        >
+          Foo
+        </span>
+      </Styled(span)>
+      <Styled(button)>
+        <button
+          className="emotion-0"
+        >
+          ›
+        </button>
+      </Styled(button)>
+    </section>
+  </Styled(section)>
+</DateSwitch>
+`;
+
+exports[`DateSwitch has bold text, if it isToday 2`] = `
+.emotion-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: sans-serif;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  height: 40px;
+  background: #fff;
+}
+
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 40px;
+  height: 100%;
+  border: none;
+  background: #eee;
+  font-size: 1.3em;
+}
+
+.emotion-1 {
+  font-weight: bold;
+}
+
+<DateSwitch
+  isToday={true}
+  text="Foo"
+>
+  <Styled(section)>
+    <section
+      className="emotion-3"
+    >
+      <Styled(button)>
+        <button
+          className="emotion-0"
+        >
+          ‹
+        </button>
+      </Styled(button)>
+      <Styled(span)
+        isToday={true}
+      >
+        <span
+          className="emotion-1"
+        >
+          Foo
+        </span>
+      </Styled(span)>
+      <Styled(button)>
+        <button
+          className="emotion-0"
+        >
+          ›
+        </button>
+      </Styled(button)>
+    </section>
+  </Styled(section)>
+</DateSwitch>
+`;
+
 exports[`DateSwitch renders correctly 1`] = `
 .emotion-3 {
   display: -webkit-box;

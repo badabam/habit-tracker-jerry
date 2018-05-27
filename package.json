@@ -17,6 +17,8 @@
     "storybook": "start-storybook -p 9001 -c .storybook",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "update-snapshots":
+      "CI=true react-scripts test --env=jsdom --updateSnapshot",
     "eject": "react-scripts eject"
   },
   "devDependencies": {

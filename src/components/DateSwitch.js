@@ -10,7 +10,7 @@ const StyledButton = styled('section')`
   background: #fff;
 `
 
-const SideButton = styled('button')`
+export const SideButton = styled('button')`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,7 +21,7 @@ const SideButton = styled('button')`
   font-size: 1.3em;
 `
 
-const DateText = styled('span')`
+export const DateText = styled('span')`
   font-weight: ${props => (props.isToday ? 'bold' : 'normal')};
 `
 
