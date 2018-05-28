@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'react-emotion'
+import PropTypes from 'prop-types'
 
 const StyledButton = styled('section')`
   display: flex;
@@ -30,15 +31,21 @@ const CountValue = styled('span')`
 `
 
 export default class CounterButton extends Component {
+  static propTypes = {
+    onDecrease: PropTypes.func,
+    onIncrease: PropTypes.func,
+    text: PropTypes.string,
+    count: PropTypes.number,
+  }
   render() {
     // extract the values from props, so it is shorter in the next lines:
-    const { onDecrease, onIncrease, text, count } = this.props
+    const { onDecrease, onIncrease, children, count } = this.props
 
     return (
       <StyledButton active={count > 0}>
         <SideButton onClick={onDecrease}>-</SideButton>
         <span>
-          {text} <CountValue>{count > 0 && `(${count})`}</CountValue>
+          {children} <CountValue>{count > 0 && `(${count})`}</CountValue>
         </span>
         <SideButton onClick={onIncrease}>+</SideButton>
       </StyledButton>

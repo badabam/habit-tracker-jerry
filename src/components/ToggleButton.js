@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'react-emotion'
 
 const StyledButton = styled('section')`
@@ -13,10 +14,17 @@ const StyledButton = styled('section')`
 `
 
 export default class ToggleButton extends Component {
+  static propTypes = {
+    children: PropTypes.string,
+    checked: PropTypes.bool,
+    onClick: PropTypes.func,
+  }
+
   render() {
+    const { onClick, children, checked } = this.props
     return (
-      <StyledButton checked={this.props.checked} onClick={this.props.onClick}>
-        {this.props.text}
+      <StyledButton checked={checked} onClick={onClick}>
+        {children}
       </StyledButton>
     )
   }

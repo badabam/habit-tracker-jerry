@@ -25,21 +25,19 @@ export default class HabitList extends Component {
             if (habit.type === 'toggle') {
               return (
                 <ToggleButton
-                  text={habit.text}
                   checked={(data && data[habit.id]) || false}
                   key={habit.id}
                   onClick={e => this.props.onToggle(habit.id)}
-                />
+                >{habit.text}</ToggleButton>
               )
             } else if (habit.type === 'count') {
               return (
                 <CounterButton
-                  text={habit.text}
                   count={(data && data[habit.id]) || 0}
                   key={habit.id}
                   onIncrease={e => this.props.onIncrease(habit.id)}
                   onDecrease={e => this.props.onDecrease(habit.id)}
-                />
+                >{habit.text}</CounterButton>
               )
             } else {
               return 'Button type not found'
