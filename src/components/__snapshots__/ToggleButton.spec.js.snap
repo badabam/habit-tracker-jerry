@@ -18,7 +18,7 @@ exports[`ToggleButton renders correctly 1`] = `
   height: 40px;
   background: #ddd;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 <ToggleButton
@@ -56,7 +56,7 @@ exports[`ToggleButton toggles color correctly 1`] = `
   height: 40px;
   background: #ddd;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 <ToggleButton
@@ -94,7 +94,7 @@ exports[`ToggleButton toggles color correctly 2`] = `
   height: 40px;
   background: skyblue;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 <ToggleButton

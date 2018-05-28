@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import styled from 'react-emotion'
+import moment from 'moment'
 
-const StyledButton = styled('section')`
+const Container = styled('section')`
   display: flex;
   font-family: sans-serif;
   align-items: center;
   justify-content: space-between;
   height: 40px;
   background: #fff;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
 `
 
 export const SideButton = styled('button')`
@@ -26,15 +31,52 @@ export const DateText = styled('span')`
 `
 
 export default class DateSwitch extends Component {
+  state = {
+    dayOffset: 0,
+  }
+
+  get currentDate() {
+    return moment()
+      .add(this.state.dayOffset, 'days')
+      .format('DD.MM.YYYY')
+  }
+
+  moveDayLeft = () => {
+    this.setState(
+      state => ({
+        dayOffset: state.dayOffset - 1,
+      }),
+      () => this.props.onUpdate(this.currentDate)
+    )
+  }
+
+  moveDayRight = () => {
+    this.setState(
+      {
+        dayOffset: this.state.dayOffset + 1,
+      },
+      () => this.props.onUpdate(this.currentDate)
+    )
+  }
+
+  componentDidMount() {
+    this.props.onUpdate(this.currentDate)
+  }
+
   render() {
-    const { onLeft, onRight, text } = this.props
+    const { dayOffset } = this.state
 
     return (
-      <StyledButton>
-        <SideButton onClick={onLeft}>‹</SideButton>
-        <DateText isToday={this.props.isToday}>{text}</DateText>
-        <SideButton onClick={onRight}>›</SideButton>
-      </StyledButton>
+      <Container>
+        <SideButton onClick={() => this.moveDayLeft()}>‹</SideButton>
+        <DateText isToday={dayOffset === 0}>{this.currentDate}</DateText>
+        <SideButton
+          disabled={dayOffset === 0}
+          onClick={() => this.moveDayRight()}
+        >
+          ›
+        </SideButton>
+      </Container>
     )
   }
 }

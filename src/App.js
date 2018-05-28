@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { css } from 'emotion'
-import moment from 'moment'
 
 import habits from './data/habits'
 import globalStyles from './styles/global'
@@ -16,13 +14,13 @@ class App extends Component {
 
     this.state = {
       habits: habits,
-      dayOffset: 0,
+      currentDate: null,
       history: {},
     }
   }
 
   updateHistory(id, updateFunction) {
-    const oldEntries = this.state.history[this.currentDate] || {}
+    const oldEntries = this.state.history[this.state.currentDate] || {}
     const oldValue = oldEntries[id]
 
     const updatedEntries = {
@@ -30,7 +28,10 @@ class App extends Component {
       [id]: updateFunction(oldValue),
     }
     this.setState({
-      history: { ...this.state.history, [this.currentDate]: updatedEntries },
+      history: {
+        ...this.state.history,
+        [this.state.currentDate]: updatedEntries,
+      },
     })
   }
 
@@ -49,45 +50,14 @@ class App extends Component {
     )
   }
 
-  get currentDate() {
-    return moment()
-      .add(this.state.dayOffset, 'days')
-      .format('DD.MM.YYYY')
-  }
-
-  moveDayLeft() {
-    this.setState(state => ({
-      dayOffset: state.dayOffset - 1,
-    }))
-  }
-
-  moveDayRight() {
-    this.setState({
-      dayOffset: this.state.dayOffset + 1,
-    })
-  }
-
   render() {
-    const dateSwitchStyles = css`
-      position: absolute;
-      left: 0;
-      top: 0;
-      right: 0;
-    `
-
     return (
       <React.Fragment>
-        <DateSwitch
-          className={dateSwitchStyles}
-          text={this.currentDate}
-          onLeft={e => this.moveDayLeft()}
-          onRight={e => this.moveDayRight()}
-          isToday={this.state.dayOffset === 0}
-        />
+        <DateSwitch onUpdate={date => this.setState({ currentDate: date })} />
         <HabitList
           headline="Gut"
           habits={this.state.habits.filter(habit => habit.category === 'good')}
-          data={this.state.history[this.currentDate]}
+          data={this.state.history[this.state.currentDate]}
           onToggle={id => this.toggleHabit(id)}
           onIncrease={id => this.increaseCount(id)}
           onDecrease={id => this.decreaseCount(id)}
@@ -95,7 +65,7 @@ class App extends Component {
         <HabitList
           headline="Schlecht"
           habits={this.state.habits.filter(habit => habit.category === 'bad')}
-          data={this.state.history[this.currentDate]}
+          data={this.state.history[this.state.currentDate]}
           onToggle={id => this.toggleHabit(id)}
           onIncrease={id => this.increaseCount(id)}
           onDecrease={id => this.decreaseCount(id)}
