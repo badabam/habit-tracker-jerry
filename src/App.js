@@ -88,7 +88,12 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/history" component={History} />
+          <Route
+            path="/history"
+            render={() => (
+              <History habits={this.state.habits} data={this.state.history} />
+            )}
+          />
           <Route path="/settings" component={Settings} />
           <div>
             <Link to="/">Today</Link>
