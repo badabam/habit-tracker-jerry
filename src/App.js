@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import moment from 'moment'
+import styled from 'react-emotion'
 
 import globalStyles from './styles/global'
 import habits from './data/habits'
@@ -11,6 +12,13 @@ import Settings from './components/Settings'
 import Navigation from './components/Navigation'
 
 globalStyles()
+
+const Grid = styled('div')`
+  display: grid;
+  grid-template-rows: auto 40px;
+  padding: 10px;
+  height: 100vh;
+`
 
 class App extends Component {
   state = {
@@ -77,37 +85,38 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <section>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <Today
-                habits={this.state.habits}
-                data={this.state.history}
-                dayOffset={this.state.dayOffset}
-                currentDate={this.currentDate}
-                moveDayLeft={this.moveDayLeft}
-                moveDayRight={this.moveDayRight}
-                toggleHabit={this.toggleHabit}
-                increaseCount={this.increaseCount}
-                decreaseCount={this.decreaseCount}
-              />
-            )}
-          />
-          <Route
-            path="/history"
-            render={() => (
-              <History habits={this.state.habits} data={this.state.history} />
-            )}
-          />
-          <Route
-            path="/settings"
-            render={() => <Settings onCreateHabit={this.handleCreateHabit} />}
-          />
-
+        <Grid>
+          <main style={{ gridRow: '1/2' }}>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Today
+                  habits={this.state.habits}
+                  data={this.state.history}
+                  dayOffset={this.state.dayOffset}
+                  currentDate={this.currentDate}
+                  moveDayLeft={this.moveDayLeft}
+                  moveDayRight={this.moveDayRight}
+                  toggleHabit={this.toggleHabit}
+                  increaseCount={this.increaseCount}
+                  decreaseCount={this.decreaseCount}
+                />
+              )}
+            />
+            <Route
+              path="/history"
+              render={() => (
+                <History habits={this.state.habits} data={this.state.history} />
+              )}
+            />
+            <Route
+              path="/settings"
+              render={() => <Settings onCreateHabit={this.handleCreateHabit} />}
+            />
+          </main>
           <Navigation />
-        </section>
+        </Grid>
       </Router>
     )
   }
