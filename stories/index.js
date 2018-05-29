@@ -5,17 +5,24 @@ import ToggleButton from '../src/components/ToggleButton'
 import CounterButton from '../src/components/CounterButton'
 import DateSwitch from '../src/components/DateSwitch'
 import HabitList from '../src/components/HabitList'
+import SwitchButton from '../src/components/SwitchButton'
 
-storiesOf('ToggleButton', module)
-  .add('unchecked', () => (
-    <ToggleButton
+storiesOf('SwitchButton', module)
+  .add('left', () => (
+    <SwitchButton
       onClick={action('clicked')}
-      checked={false}
-      text={'Sport gemacht'}
+      selectedIndex={0}
+      textLeft={'gut'}
+      textRight={'schlecht'}
     />
   ))
-  .add('checked', () => (
-    <ToggleButton onClick={action('clicked')} checked={true} text={'Gelernt'} />
+  .add('right', () => (
+    <SwitchButton
+      onClick={action('clicked')}
+      selectedIndex={1}
+      textLeft={'gut'}
+      textRight={'schlecht'}
+    />
   ))
 
 storiesOf('CounterButton', module)
@@ -52,8 +59,5 @@ storiesOf('HabitList', module).add('counted', () => (
       { text: 'Another button', id: '1', count: 0 },
       { text: 'A third button', id: '2', count: 3 },
     ]}
-    onToggle={action('toggle')}
-    onIncrease={action('increase')}
-    onDecrease={action('decrease')}
   />
 ))

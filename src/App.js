@@ -49,6 +49,12 @@ class App extends Component {
     )
   }
 
+  handleCreateHabit = habit => {
+    this.setState({
+      habits: [...this.state.habits, habit],
+    })
+  }
+
   get currentDate() {
     return moment()
       .add(this.state.dayOffset, 'days')
@@ -94,7 +100,11 @@ class App extends Component {
               <History habits={this.state.habits} data={this.state.history} />
             )}
           />
-          <Route path="/settings" component={Settings} />
+          <Route
+            path="/settings"
+            render={() => <Settings onCreateHabit={this.handleCreateHabit} />}
+          />
+
           <div>
             <Link to="/">Today</Link>
             <Link to="/history">History</Link>
