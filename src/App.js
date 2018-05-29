@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import moment from 'moment'
 
 import globalStyles from './styles/global'
@@ -8,6 +8,7 @@ import habits from './data/habits'
 import Today from './components/Today'
 import History from './components/History'
 import Settings from './components/Settings'
+import Navigation from './components/Navigation'
 
 globalStyles()
 
@@ -105,11 +106,7 @@ class App extends Component {
             render={() => <Settings onCreateHabit={this.handleCreateHabit} />}
           />
 
-          <div>
-            <Link to="/">Today</Link>
-            <Link to="/history">History</Link>
-            <Link to="/settings">Settings</Link>
-          </div>
+          <Navigation />
         </section>
       </Router>
     )
