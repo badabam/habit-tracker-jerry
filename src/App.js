@@ -30,7 +30,11 @@ const Grid = styled('div')`
   height: 100vh;
 `
 
-const store = createStore(reducer, defaultState)
+const store = createStore(
+  reducer,
+  defaultState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 class App extends Component {
   componentDidMount() {
