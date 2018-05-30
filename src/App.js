@@ -1,15 +1,25 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import moment from 'moment'
 import styled from 'react-emotion'
-
 import globalStyles from './styles/global'
-import habits from './data/habits'
 
-import Today from './components/Today'
-import History from './components/History'
-import Settings from './components/Settings'
+import TodayPage from './components/TodayPage'
+import HistoryPage from './components/HistoryPage'
+import SettingsPage from './components/SettingsPage'
 import Navigation from './components/Navigation'
+
+import { createStore } from 'redux'
+import reducer, { getCurrentDate } from './reducers/reducer'
+import defaultState from './reducers/defaultState'
+
+import {
+  toggleHabit,
+  increaseCount,
+  decreaseCount,
+  createHabit,
+  moveDayLeft,
+  moveDayRight,
+} from './actions/actions'
 
 globalStyles()
 
@@ -20,99 +30,49 @@ const Grid = styled('div')`
   height: 100vh;
 `
 
+const store = createStore(reducer, defaultState)
+
 class App extends Component {
-  state = {
-    habits: habits,
-    dayOffset: 0,
-    history: {},
-  }
-
-  updateHistory(id, updateFunction) {
-    const oldEntries = this.state.history[this.currentDate] || {}
-    const oldValue = oldEntries[id]
-
-    const updatedEntries = {
-      ...oldEntries,
-      [id]: updateFunction(oldValue),
-    }
-    this.setState({
-      history: {
-        ...this.state.history,
-        [this.currentDate]: updatedEntries,
-      },
-    })
-  }
-
-  toggleHabit = id => {
-    this.updateHistory(id, oldValue => !oldValue)
-  }
-
-  increaseCount = id => {
-    this.updateHistory(id, oldValue => (oldValue == null ? 1 : oldValue + 1))
-  }
-
-  decreaseCount = id => {
-    this.updateHistory(
-      id,
-      oldValue => (oldValue == null || oldValue === 0 ? 0 : oldValue - 1)
-    )
-  }
-
-  handleCreateHabit = habit => {
-    this.setState({
-      habits: [...this.state.habits, habit],
-    })
-  }
-
-  get currentDate() {
-    return moment()
-      .add(this.state.dayOffset, 'days')
-      .format('DD.MM.YYYY')
-  }
-
-  moveDayLeft = () => {
-    this.setState(state => ({
-      dayOffset: state.dayOffset - 1,
-    }))
-  }
-
-  moveDayRight = () => {
-    this.setState({
-      dayOffset: this.state.dayOffset + 1,
-    })
+  componentDidMount() {
+    store.subscribe(() => this.forceUpdate())
   }
 
   render() {
+    const state = store.getState()
     return (
       <Router>
         <Grid>
-          <main style={{ gridRow: '1/2' }}>
+          <main style={{ gridRow: '1', overflow: 'hidden' }}>
             <Route
               exact
               path="/"
               render={() => (
-                <Today
-                  habits={this.state.habits}
-                  data={this.state.history}
-                  dayOffset={this.state.dayOffset}
-                  currentDate={this.currentDate}
-                  moveDayLeft={this.moveDayLeft}
-                  moveDayRight={this.moveDayRight}
-                  toggleHabit={this.toggleHabit}
-                  increaseCount={this.increaseCount}
-                  decreaseCount={this.decreaseCount}
+                <TodayPage
+                  habits={state.habits}
+                  data={state.history}
+                  dayOffset={state.dayOffset}
+                  currentDate={getCurrentDate(state)}
+                  moveDayLeft={id => store.dispatch(moveDayLeft(id))}
+                  moveDayRight={id => store.dispatch(moveDayRight(id))}
+                  toggleHabit={id => store.dispatch(toggleHabit(id))}
+                  increaseCount={id => store.dispatch(increaseCount(id))}
+                  decreaseCount={id => store.dispatch(decreaseCount(id))}
                 />
               )}
             />
             <Route
               path="/history"
               render={() => (
-                <History habits={this.state.habits} data={this.state.history} />
+                <HistoryPage habits={state.habits} data={state.history} />
               )}
             />
             <Route
               path="/settings"
-              render={() => <Settings onCreateHabit={this.handleCreateHabit} />}
+              render={() => (
+                <SettingsPage
+                  onCreateHabit={h => store.dispatch(createHabit(h))}
+                />
+              )}
             />
           </main>
           <Navigation />

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import styled from 'react-emotion'
 
 const Wrapper = styled('nav')`
-  grid-row: 2/2;
+  grid-row: 2;
   display: flex;
 `
 

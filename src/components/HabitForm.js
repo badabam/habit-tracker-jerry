@@ -10,6 +10,8 @@ const StyledInput = styled('input')`
   box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   width: 100%;
+  font-size: 1.1em;
+  padding-left: 10px;
 `
 
 const StyledButton = styled('section')`

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import HabitForm from './HabitForm'
 
-export default class Settings extends Component {
+export default class SettingsPage extends Component {
   render() {
     return (
       <div>
