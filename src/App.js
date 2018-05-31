@@ -10,7 +10,7 @@ import Navigation from './components/Navigation'
 
 import { createStore } from 'redux'
 import reducer, { getCurrentDate } from './reducers/reducer'
-import defaultState from './reducers/defaultState'
+import initialState from './reducers/initialState'
 
 import {
   toggleHabit,
@@ -32,7 +32,7 @@ const Grid = styled('div')`
 
 const store = createStore(
   reducer,
-  defaultState,
+  initialState,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
