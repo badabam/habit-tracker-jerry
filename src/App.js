@@ -30,6 +30,13 @@ const Grid = styled('div')`
   height: 100vh;
 `
 
+const Main = styled('main')`
+  grid-row: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+`
+
 const store = createStore(
   reducer,
   initialState,
@@ -43,45 +50,49 @@ class App extends Component {
 
   render() {
     const state = store.getState()
+
+    const dispatch = actionCreator => payload =>
+      store.dispatch(actionCreator(payload))
+
     return (
-      <Router>
-        <Grid>
-          <main style={{ gridRow: '1', overflow: 'hidden' }}>
-            <Route
-              exact
-              path="/"
-              render={() => (
-                <TodayPage
-                  habits={state.habits}
-                  data={state.history}
-                  dayOffset={state.dayOffset}
-                  currentDate={getCurrentDate(state)}
-                  moveDayLeft={id => store.dispatch(moveDayLeft(id))}
-                  moveDayRight={id => store.dispatch(moveDayRight(id))}
-                  toggleHabit={id => store.dispatch(toggleHabit(id))}
-                  increaseCount={id => store.dispatch(increaseCount(id))}
-                  decreaseCount={id => store.dispatch(decreaseCount(id))}
-                />
-              )}
-            />
-            <Route
-              path="/history"
-              render={() => (
-                <HistoryPage habits={state.habits} data={state.history} />
-              )}
-            />
-            <Route
-              path="/settings"
-              render={() => (
-                <SettingsPage
-                  onCreateHabit={h => store.dispatch(createHabit(h))}
-                />
-              )}
-            />
-          </main>
-          <Navigation />
-        </Grid>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Grid>
+            <Main>
+              <Route
+                exact
+                path="/"
+                render={() => (
+                  <TodayPage
+                    habits={state.habits}
+                    data={state.history}
+                    dayOffset={state.dayOffset}
+                    currentDate={getCurrentDate(state)}
+                    moveDayLeft={dispatch(moveDayLeft)}
+                    moveDayRight={dispatch(moveDayRight)}
+                    toggleHabit={dispatch(toggleHabit)}
+                    increaseCount={dispatch(increaseCount)}
+                    decreaseCount={dispatch(decreaseCount)}
+                  />
+                )}
+              />
+              <Route
+                path="/history"
+                render={() => (
+                  <HistoryPage habits={state.habits} data={state.history} />
+                )}
+              />
+              <Route
+                path="/settings"
+                render={() => (
+                  <SettingsPage onCreateHabit={dispatch(createHabit)} />
+                )}
+              />
+            </Main>
+            <Navigation />
+          </Grid>
+        </Router>
+      </Provider>
     )
   }
 }
